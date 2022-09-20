@@ -50,7 +50,34 @@ module.exports = [
         transformer: trimUserInput,
         get validate() {
             return requireNonEmptyValue.bind(this);
-        },
+        }
+    },
+    {
+        type: 'input',
+        name: 'usage',
+        message: 'Enter information on the project usage:',
+        transformer: trimUserInput,
+        get validate() {
+            return requireNonEmptyValue.bind(this);
+        }
+    },
+    {
+        type: 'input',
+        name: 'contribution',
+        message: 'Enter details on how others can/should contribute to the project:',
+        transformer: trimUserInput,
+        get validate() {
+            return requireNonEmptyValue.bind(this);
+        }
+    },
+    {
+        type: 'input',
+        name: 'testing',
+        message: 'Enter information on how developers can test this project:',
+        transformer: trimUserInput,
+        get validate() {
+            return requireNonEmptyValue.bind(this);
+        }
     },
     {
         type: 'list',

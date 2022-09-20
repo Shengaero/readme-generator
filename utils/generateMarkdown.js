@@ -1,34 +1,57 @@
 const shieldBadgeURLPrefix = 'https://img.shields.io/badge/';
 
-// TODO: Create a function that returns a license badge based on which license is passed in
-// If there is no license, return an empty string
 function renderLicenseBadge(license) {
+    if(!license) {
+        return '';
+    }
+
     return `[![License](${shieldBadgeURLPrefix}${license.badge})](${renderLicenseLink(license)})`;
 }
 
-// TODO: Create a function that returns the license link
-// If there is no license, return an empty string
 function renderLicenseLink(license) {
+    if(!license) {
+        return '';
+    }
+
     return license.link;
 }
 
-// TODO: Create a function that returns the license section of README
-// If there is no license, return an empty string
 function renderLicenseSection(license) {
+    if(!license) {
+        return '';
+    }
+
     return `is available under the [${license.name}](${renderLicenseLink(license)})`;
 }
 
-// TODO: Create a function to generate markdown for README
 function generateMarkdown(data) {
-    return `${renderLicenseBadge(data.license)}
+    return (
+`${renderLicenseBadge(data.license)}
 # ${data.title}
 ${data.description}
 
-# Installation Instructions
+## Table of Contents
+* [Installation](#installation)
+* [Usage](#usage)
+* [Contribution](#contribution)
+* [Testing](#testing)
+* [License](#license)
+
+## Installation
 ${data.installation}
 
-# License
-${data.title} ${renderLicenseSection(data.license)}.`.trim();
+## Usage
+${data.usage}
+
+## Contibution
+${data.contribution}
+
+## Testing
+${data.testing}
+
+## License
+${data.title} ${renderLicenseSection(data.license)}.`
+    ).trim();
 }
 
 module.exports = generateMarkdown;

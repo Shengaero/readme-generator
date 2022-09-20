@@ -1,35 +1,39 @@
-// TODO: Include packages needed for this application
 const inquirer = require('inquirer');
-const path = require('path');
 const { writeFile } = require('fs');
 
 const generateMarkdown = require('./utils/generateMarkdown');
 const getUserArguments = require('./utils/arguments');
 const questions = require('./utils/questions');
 
-// TODO: Create a function to write README file
 function writeToFile(fileName, data) {
-    console.log(data);
+    // generate the markdown
     let markdown = generateMarkdown(data);
-    console.log(markdown);
 
-    writeFile(fileName, markdown, ['w'], (err) => console.log(err));
+    // write it to a file
+    writeFile(fileName, markdown, ['w'], (err) => {
+        if(err !== null) {
+            console.error(err);
+        }
+    });
 }
 
-// TODO: Create a function to initialize app
 function init() {
+    // get the user arguments
     let userArguments = getUserArguments();
 
-    // TODO implement user arguments
+    // default filename to 'README.md' in the current working directory
     let fileName = '.\\README.md';
     if(userArguments.output) {
         fileName = userArguments.output;
     }
 
+    // prompt the user the questions
     inquirer.prompt(questions)
+        // when the user answers them, write to the target file
         .then(answers => writeToFile(fileName, answers))
-        .catch(error => console.log(error));
+        // catch and log any errors
+        .catch(error => console.error(error));
 }
 
-// Function call to initialize app
+// function call to initialize app
 init();
