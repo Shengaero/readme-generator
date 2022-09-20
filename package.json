@@ -1,0 +1,22 @@
+{
+  "name": "readme-generator",
+  "version": "0.1.0",
+  "description": "A professional README generator",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Kaidan Gustave",
+  "license": "ISC",
+  "dependencies": {
+    "inquirer": "^8.2.4"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Shengaero/readme-generator.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Shengaero/readme-generator/issues"
+  },
+  "homepage": "https://github.com/Shengaero/readme-generator#readme"
+}
