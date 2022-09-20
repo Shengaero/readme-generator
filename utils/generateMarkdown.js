@@ -3,7 +3,7 @@ const shieldBadgeURLPrefix = 'https://img.shields.io/badge/';
 // TODO: Create a function that returns a license badge based on which license is passed in
 // If there is no license, return an empty string
 function renderLicenseBadge(license) {
-    return `[![License](${shieldBadgeURLPrefix}${license.name})](${renderLicenseLink(license)})`;
+    return `[![License](${shieldBadgeURLPrefix}${license.badge})](${renderLicenseLink(license)})`;
 }
 
 // TODO: Create a function that returns the license link
@@ -24,10 +24,10 @@ function generateMarkdown(data) {
 # ${data.title}
 ${data.description}
 
-## Installation Instructions
+# Installation Instructions
 ${data.installation}
 
-## License
+# License
 ${data.title} ${renderLicenseSection(data.license)}.`.trim();
 }
 

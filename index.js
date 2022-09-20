@@ -1,7 +1,7 @@
 // TODO: Include packages needed for this application
 const inquirer = require('inquirer');
 const path = require('path');
-const fs = require('fs');
+const { writeFile } = require('fs');
 
 const generateMarkdown = require('./utils/generateMarkdown');
 const getUserArguments = require('./utils/arguments');
@@ -12,6 +12,8 @@ function writeToFile(fileName, data) {
     console.log(data);
     let markdown = generateMarkdown(data);
     console.log(markdown);
+
+    writeFile(fileName, markdown, ['w'], (err) => console.log(err));
 }
 
 // TODO: Create a function to initialize app
@@ -19,9 +21,13 @@ function init() {
     let userArguments = getUserArguments();
 
     // TODO implement user arguments
+    let fileName = '.\\README.md';
+    if(userArguments.output) {
+        fileName = userArguments.output;
+    }
 
     inquirer.prompt(questions)
-        .then(answers => writeToFile('', answers))
+        .then(answers => writeToFile(fileName, answers))
         .catch(error => console.log(error));
 }
 

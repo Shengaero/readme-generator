@@ -1,6 +1,7 @@
 let allowedArguments = {
-    o: {
+    output: {
         name: 'output',
+        short: 'o',
         desc: 'The output location of the README file. By default this will be the current working directory.',
         requiresValue: true
     }
@@ -19,18 +20,32 @@ function getUserArguments() {
         let argumentType = null;
         // if the next arg is an option value
         if(next !== null) {
-            // get the type based on the next variable value
-            argumentType = allowedArguments[next];
+            // if the valuable is shorthand we need to get it based off of which allowed argument it matches
+            if(next.length === 1) {
+                // iterate through them
+                for(let key in allowedArguments) {
+                    let allowed = allowedArguments[key];
+                    // if it matches
+                    if(allowed.short === next) {
+                        // set and break
+                        argumentType = allowed;
+                        break;
+                    }
+                }
+            } else {
+                // otherwise get the type based on the next variable value
+                argumentType = allowedArguments[next];
+            }
             // set next to null, we don't need it anymore
             next = null;
         }
 
         // if the arg starts with either '-' or '--' then it's denoting the next arg will be a value of
         //that option.Given this, we will set the next variable to the first character of the option
-        if(arg.startsWith('-')) {
+        if(arg.startsWith('--')) {
+            next = arg.substring(2);
+        } else if(arg.startsWith('-')) {
             next = arg.charAt(1);
-        } else if(arg.startsWith('--')) {
-            next = arg.charAt(2);
         }
 
         // if we have an argument type
