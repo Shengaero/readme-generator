@@ -1,9 +1,18 @@
 let allowedArguments = {
+    help: {
+        name: 'help',
+        short: 'h',
+        desc: 'Outputs this help message.',
+    },
     output: {
         name: 'output',
         short: 'o',
         desc: 'The output location of the README file. By default this will be the current working directory.',
         requiresValue: true
+    },
+    'input-in-editor': {
+        name: 'input-in-editor',
+        desc: 'Input text values in preferred editor.'
     }
 }
 
@@ -64,6 +73,8 @@ function getUserArguments() {
 
             // set the value of the argument in the returned arguments
             returnedArgs[argumentType.name] = argValue;
+            // remove the argument type, we don't need it anymore
+            argumentType = null;
         }
     }
 
@@ -71,4 +82,4 @@ function getUserArguments() {
     return returnedArgs;
 }
 
-module.exports = getUserArguments;
+module.exports = {allowedArguments, getUserArguments};

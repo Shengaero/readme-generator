@@ -24,19 +24,32 @@ function renderLicenseSection(license) {
     return `is available under the [${license.name}](${renderLicenseLink(license)})`;
 }
 
+function buildTableOfContents(data) {
+    let content = '\n## Table of Contents\n';
+    if(data.installation && data.installation.length !== 0) {
+        content += '* [Installation](#installation)\n';
+    }
+    if(data.usage && data.usage.length !== 0) {
+        content += '* [Usage](#usage)\n';
+    }
+    if(data.contribution && data.contribution.length !== 0) {
+        content += '* [Contribution](#contribution)\n';
+    }
+    if(data.testing && data.testing.length !== 0) {
+        content += '* [Testing](#testing)\n';
+    }
+    if(data.license) {
+        content += '* [License](#license)\n';
+    }
+    return content;
+}
+
 function generateMarkdown(data) {
     return (
-`${renderLicenseBadge(data.license)}
+        `${renderLicenseBadge(data.license)}
 # ${data.title}
 ${data.description}
-
-## Table of Contents
-* [Installation](#installation)
-* [Usage](#usage)
-* [Contribution](#contribution)
-* [Testing](#testing)
-* [License](#license)
-
+${data.hasTableOfContents ? buildTableOfContents(data) : ''}
 ## Installation
 ${data.installation}
 
@@ -47,11 +60,11 @@ ${data.usage}
 ${data.contribution}
 
 ## Testing
-${data.testing}
+${data.testing}${data.license ? `
 
 ## License
-${data.title} ${renderLicenseSection(data.license)}.`
-    ).trim();
+${data.title} ${renderLicenseSection(data.license)}.` : ''}
+`);
 }
 
 module.exports = generateMarkdown;

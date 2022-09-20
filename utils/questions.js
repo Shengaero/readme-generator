@@ -5,7 +5,7 @@ const trimUserInput = value => value.trim();
 const createLicense = (name, link, badge, short = name) => ({
     name: name,
     short: short,
-    value: {
+    value: name === 'No License' ? null : {
         name: name,
         link: link,
         badge: badge
@@ -14,7 +14,7 @@ const createLicense = (name, link, badge, short = name) => ({
 
 function requireNonEmptyValue(value) {
     if(value.trim().length === 0) {
-        return `Invalid value: must be non-empty ${this.name}!`;
+        return `Invalid value: ${this.name} must be non-empty!`;
     }
     return true;
 }
@@ -42,6 +42,12 @@ module.exports = [
         get validate() {
             return requireNonEmptyValue.bind(this);
         }
+    },
+    {
+        type: 'confirm',
+        name: 'hasTableOfContents',
+        message: 'Should a table of contents be created?',
+        default: true
     },
     {
         type: 'input',
@@ -94,7 +100,8 @@ module.exports = [
             createLicense('GNU General Public License v2.0', 'https://www.gnu.org/licenses/old-licenses/gpl-2.0.en.html', 'License-GPL_v2-blue.svg', 'GNU GPL v2'),
             createLicense('Mozilla Public License 2.0', 'https://opensource.org/licenses/MPL-2.0', 'License-MPL_2.0-brightgreen.svg'),
             createLicense('The Unlicense', 'http://unlicense.org/', 'license-Unlicense-blue.svg'),
-            createLicense('The Do What the Fuck You Want to Public License', 'http://www.wtfpl.net/about/', 'License-WTFPL-brightgreen.svg')
+            createLicense('The Do What the Fuck You Want to Public License', 'http://www.wtfpl.net/about/', 'License-WTFPL-brightgreen.svg'),
+            createLicense('No License')
         ]
     }
 ];
