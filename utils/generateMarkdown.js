@@ -5,7 +5,7 @@ function renderLicenseBadge(license) {
         return '';
     }
 
-    return `[![License](${shieldBadgeURLPrefix}${license.badge})](${renderLicenseLink(license)})`;
+    return `[![License](${shieldBadgeURLPrefix}${license.badge})](${renderLicenseLink(license)})\n`;
 }
 
 function renderLicenseLink(license) {
@@ -45,9 +45,7 @@ function buildTableOfContents(data) {
 }
 
 function generateMarkdown(data) {
-    return (
-        `${renderLicenseBadge(data.license)}
-# ${data.title}
+    return (`${renderLicenseBadge(data.license)}# ${data.title}
 ${data.description}
 ${data.hasTableOfContents ? buildTableOfContents(data) : ''}
 ## Installation
