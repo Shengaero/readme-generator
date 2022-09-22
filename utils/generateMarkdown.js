@@ -41,6 +41,9 @@ function buildTableOfContents(data) {
     if(data.license) {
         content += '* [License](#license)\n';
     }
+    if((data.github || data.email) && (data.github.length !== 0 || data.email.length !== 0)) {
+        content += '* [Questions](#questions)\n';
+    }
     return content;
 }
 
@@ -62,6 +65,9 @@ ${data.testing}${data.license ? `
 
 ## License
 ${data.title} ${renderLicenseSection(data.license)}.` : ''}
+
+## Questions
+For questions or other inquiries, feel free to reach out to me via either [GitHub](https://github.com/${data.github}/) or send an email to ${data.email}.
 `);
 }
 

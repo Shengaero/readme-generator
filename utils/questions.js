@@ -103,5 +103,23 @@ module.exports = [
             createLicense('The Do What the Fuck You Want to Public License', 'http://www.wtfpl.net/about/', 'License-WTFPL-brightgreen.svg'),
             createLicense('No License')
         ]
+    },
+    {
+        type: 'input',
+        name: 'github',
+        message: 'Enter your GitHub username:',
+        transformer: trimUserInput,
+        get validate() {
+            return requireNonEmptyValue.bind(this);
+        }
+    },
+    {
+        type: 'input',
+        name: 'email',
+        message: 'Enter your email:',
+        transformer: trimUserInput,
+        get validate() {
+            return requireNonEmptyValue.bind(this);
+        }
     }
 ];
